@@ -7,9 +7,7 @@ describe Client do
     Client.new { |config| config.api_key = "123abc" }.api_key.should == "123abc"
   end
 
-  describe '#sound' do
-    it 'returns a response object' do
-      subject.sound(23).should be_a(Response)
-    end
+  describe '#send_request' do
+
   end
 end

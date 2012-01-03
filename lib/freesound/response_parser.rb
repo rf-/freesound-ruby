@@ -1,6 +1,3 @@
-require 'json/ext'
-require 'xmlsimple'
-
 module Freesound
   class InvalidResponseFormatError < ArgumentError; end
 
@@ -23,10 +20,8 @@ module Freesound
       end
     end
 
-    private
-
     def parse_xml(raw)
-      XmlSimple.xml_in(raw).symbolize_keys
+      XmlSimple.xml_in(raw).symbolize_keys.flatten_single_element_array_values
     end
 
     def parse_yaml(raw)

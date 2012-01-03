@@ -1,9 +1,12 @@
-module Freesound
-  BASE_URL = 'http://www.freesound.org/api'
-end
+require 'net/http'
+require 'uri'
+require 'json/ext'
+require 'xmlsimple'
 
 require 'freesound/core_ext'
 require 'freesound/client'
 require 'freesound/configuration'
 require 'freesound/response'
 require 'freesound/response_parser'
+require 'freesound/request'
+require 'freesound/api'
