@@ -3,7 +3,7 @@ module Freesound
     def initialize(raw="", options={})
       @format = options[:format] || :json
       @parser = ResponseParser.new(@format)
-      @data = @parser.parse(raw, @format)
+      @data = @parser.parse(raw)
     end
   end
 end
