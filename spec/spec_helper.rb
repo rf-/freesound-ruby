@@ -10,5 +10,7 @@ include Freesound
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  config.before { @api_key = ENV['FREESOUND_KEY'] }
+  config.before do
+    Freesound::Configuration.api_key = ENV['FREESOUND_KEY'] || fail("Register your app at freesound.org and store your key in the FREESOUND_KEY variable.")
+  end
 end
