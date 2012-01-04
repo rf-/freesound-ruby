@@ -4,6 +4,10 @@ require 'json/ext'
 require 'xmlsimple'
 
 module Freesound
+  def self.root_dir
+    File.expand_path('..', File.dirname(__FILE__))
+  end
+
   module Configuration
     DEFAULTS = {
       :api_key  => ENV['FREESOUND_KEY'],
@@ -29,3 +33,6 @@ require 'core_ext'
 require 'freesound/client'
 require 'freesound/request'
 require 'freesound/api'
+require 'freesound/uri_compiler'
+require 'freesound/response'
+require 'freesound/response_parser'

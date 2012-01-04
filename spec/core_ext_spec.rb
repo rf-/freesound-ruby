@@ -20,3 +20,9 @@ describe Hash do
     end
   end
 end
+
+describe String do
+  describe '#sign_with_api_key' do
+    "www.test.com/api".sign_with_api_key("123api").should == "www.test.com/api&api_key=123api"
+  end
+end

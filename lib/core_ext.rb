@@ -18,3 +18,9 @@ class Hash
     map { |k, v| "#{k}=#{v}" }.join("&")
   end
 end
+
+class String
+  def sign_with_api_key(key)
+    "#{self}&api_key=#{key}"
+  end
+end

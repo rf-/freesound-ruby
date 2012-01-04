@@ -1,6 +1,4 @@
-module Freesound
-  class Client
-    def initialize(options={})
-    end
+class Freesound::Client
+  def initialize(options={})
   end
 end

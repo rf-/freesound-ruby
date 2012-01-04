@@ -1,0 +1,2 @@
+class Freesound::Response
+end
