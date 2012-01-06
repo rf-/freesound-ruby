@@ -1,15 +1,12 @@
 analysis_frames: http://www.freesound.org/data/analysis/0/10_43_frames.json
 analysis_stats: http://www.freesound.org/api/sounds/10/analysis/
-avg_rating: 6.8333333333333304
+avg_rating: 6.83
 bitdepth: 16
 bitrate: 705
 channels: 1
 created: 2005-03-09 10:47:33
-description: "Morphing between the sound of a plane and a voice\r\nsaying \"We were\
-  \ away a while ago\", done computing the short-time Fourier transform of two recorded\
-  \ sounds, interpolating their spectral data and performing the inverse transform.\
-  \ Done in the early 1990's on a NeXT computer."
-duration: 5.5493197278900004
+description: "test description"
+duration: 5.54
 filesize: 489494
 id: 10
 license: http://creativecommons.org/licenses/by/3.0/

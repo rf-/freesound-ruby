@@ -9,9 +9,9 @@ class Freesound::URICompiler
 
   def compile_uri(search_params, sound_id)
     if search_params
-      search_uri(search_params).sign_with_api_key(Configuration.api_key)
+      URI.parse(search_uri(search_params).sign_with_api_key(Configuration.api_key))
     elsif sound_id
-      sound_id_uri(sound_id).sign_with_api_key(Configuration.api_key)
+      URI.parse(sound_id_uri(sound_id).sign_with_api_key(Configuration.api_key))
     end
   end
 

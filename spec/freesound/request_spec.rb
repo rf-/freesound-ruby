@@ -7,16 +7,23 @@ describe Request do
     subject.params.should == {:sound_id => 13}
   end
 
-  describe '#send!' do
-    it 'returns a hash' do
-      subject.send!.should be_a(Hash)
+  describe '#get!' do
+    before do
+      json = File.read("#{Freesound.root_dir}/data/sample.json")
+      path = "http://www.freesound.org/api/sounds/13?api_key=#{Configuration.api_key}"
+
+      stub_http_request(:get, path).to_return(:body => json)
     end
 
-    context 'after #send!' do
-      before { subject.send! }
+    it 'returns a hash' do
+      subject.get!.should be_a(Hash)
+    end
+
+    context 'after #get!' do
+      before { subject.get! }
     
       it 'has a response corresponding to the params of the request' do
-        subject.response[:sound_id].should == 13
+        subject.response[:id].should == 10
       end
     end
   end
