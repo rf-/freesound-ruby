@@ -5,10 +5,6 @@ describe ResponseParser do
     ResponseParser.new(:xml).format.should == :xml
   end
 
-  it 'fails with invalid format' do
-    expect { ResponseParser.new(:pdf) }.to raise_error(ResponseParser::InvalidResponseFormatError)
-  end
-
   describe '#parse' do
     before do
       @json = File.read("#{Freesound.root_dir}/data/sample.json")

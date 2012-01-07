@@ -1,16 +1,8 @@
 class Freesound::ResponseParser
-
-  class InvalidResponseFormatError < ArgumentError; end
-
   attr_reader :format
 
-  def initialize(format=:json)
-    self.format = format
-  end
-
-  def format=(format)
-    raise(InvalidResponseFormatError, "#{format} is not a valid response format") unless [:json, :xml, :yaml, :yml].include?(format.to_sym)
-    @format = format.to_sym
+  def initialize(format)
+    @format = format
   end
 
   def parse(raw)

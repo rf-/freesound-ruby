@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'freesound'
-require 'webmock/rspec'
+#require 'webmock/rspec'
 
 include Freesound
 

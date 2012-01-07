@@ -1,17 +1,26 @@
+class Freesound::InvalidRequestFormatError < ArgumentError; end
+
 class Freesound::Request
-  attr_reader :uri, :params, :response, :format, :response_parser
+  attr_reader :uri, :params, :response, :format
 
   def initialize(params={})
-    @params = params.dup
-    @format = params.delete(:format) || :json
-    @response_parser = ResponseParser.new(@format)
+    @format = params[:format] || :json
+    raise(InvalidRequestFormatError, "#{format} is not a valid request format") unless [:json, :xml, :yaml, :yml].include?(@format.to_sym)
 
-    uri_compiler = URICompiler.new(params)
-    @uri         = uri_compiler.uri
-    @response    = nil
+    @params = params
+    @response = nil
+  end
+
+  def format=(format)
+    @format = format.to_sym
+  end
+
+  def uri
+    @uri ||= URICompiler.new(@params.dup.merge({:format => @format})).uri
   end
 
   def get!
-    @response = @response_parser.parse(Net::HTTP.get(@uri))
+    response_body = Net::HTTP.get_response(uri).body
+    @response ||= Response.new(response_body, @format)
   end
 end
