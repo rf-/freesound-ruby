@@ -35,12 +35,6 @@ describe Hash do
 end
 
 describe String do
-  describe '#sign_with_api_key' do
-    it 'adds the api key parameter' do
-      "www.test.com/api".sign_with_api_key("123api").should == "www.test.com/api&api_key=123api"
-    end
-  end
-
   describe '#numberize' do
     it 'converts to an integer' do
       '123'.numberize.should == 123

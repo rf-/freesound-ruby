@@ -6,11 +6,11 @@ describe Client do
   end
 
   context 'with valid api key' do
-    subject { Client.new(Configuration.api_key) }
+    subject { Client.new(Freesound.config.api_key) }
 
     before do
       json = File.read("#{Freesound.root_dir}/data/sample.json")
-      path = "http://www.freesound.org/api/sounds/10/?api_key=#{Configuration.api_key}&format=json"
+      path = "http://www.freesound.org/api/sounds/10/?api_key=#{Freesound.config.api_key}&format=json"
 
       stub_request(:get, path).to_return(:body => json)
     end
@@ -32,7 +32,15 @@ describe Client do
     end
 
     describe '#search_sounds' do
-      pending "not implemented yet"
+      before do
+        json = File.read("#{Freesound.root_dir}/data/sample_query.json")
+        path = "http://www.freesound.org/api/sounds/search/?api_key=#{Freesound.config.api_key}&format=json&q=badass"
+        stub_request(:get, path).to_return(:body => json)
+      end
+
+      it 'returns a response' do
+        subject.search_sounds("badass").should be_a(Response)
+      end
     end
   end
 end

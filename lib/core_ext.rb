@@ -28,10 +28,6 @@ class Hash
 end
 
 class String
-  def sign_with_api_key(key)
-    "#{self}&api_key=#{key}"
-  end
-
   def numberize
     if numberizeable?
       float? ? to_f : to_i

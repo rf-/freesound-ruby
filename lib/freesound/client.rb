@@ -17,7 +17,7 @@ class Freesound::Client
     response
   end
 
-  def search_sounds(query)
+  def search_sounds(query, options={})
     request = Request.new(:search => {:q => query})
     request.get!
   end

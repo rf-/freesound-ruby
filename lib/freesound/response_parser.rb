@@ -19,8 +19,7 @@ class Freesound::ResponseParser
   private
 
   def parse_json(raw)
-    #::Crack::JSON.parse(raw).underscore_keys.symbolize_keys
-    JSON.parse(raw).underscore_keys.symbolize_keys
+    ::Crack::JSON.parse(raw).underscore_keys.symbolize_keys
   end
 
   # xml gets parsed slightly differently than json and yaml.

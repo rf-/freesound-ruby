@@ -9,20 +9,22 @@ class Freesound::URICompiler
   end
 
   def compile_uri_string(search_params, sound_id, format)
+    format_string = format ? "&format=#{format}" : ""
+
     if search_params
-      search_uri(search_params).sign_with_api_key(Configuration.api_key)
+      search_uri(search_params, format_string)
     elsif sound_id
-      sound_id_uri(sound_id).sign_with_api_key(Configuration.api_key)
-    end + (format.nil? ? "" : "&format=#{format}")
+      sound_id_uri(sound_id, format_string)
+    end
   end
 
   private
 
-  def search_uri(search_params)
-    "#{Configuration.sounds_url}/search/?#{search_params.to_uri}"
+  def search_uri(search_params, format_string)
+    "#{Configuration.sounds_url}/search/?api_key=#{Freesound.config.api_key}#{format_string}&#{search_params.to_uri}"
   end
 
-  def sound_id_uri(id)
-    "#{Configuration.sounds_url}/#{id}/?"
+  def sound_id_uri(id, format_string)
+    "#{Configuration.sounds_url}/#{id}/?api_key=#{Freesound.config.api_key}#{format_string}"
   end
 end

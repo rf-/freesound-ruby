@@ -1,7 +1,7 @@
 require 'net/http'
 require 'uri'
-require 'json'
 require 'crack'
+require 'core_ext'
 
 YAML::ENGINE.yamler = 'syck'
 
@@ -43,11 +43,15 @@ module Freesound
 
     yield Configuration if block_given?
   end
+
+  def self.config
+    Configuration
+  end
 end # module Freesound
 
-require 'core_ext'
 require 'freesound/client'
 require 'freesound/request'
 require 'freesound/uri_compiler'
 require 'freesound/response'
 require 'freesound/response_parser'
+require 'freesound/sound'
