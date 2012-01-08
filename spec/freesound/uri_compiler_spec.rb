@@ -4,17 +4,17 @@ describe URICompiler do
   describe '#compile_uri_string' do
     it 'compiles a proper sound-by-id uri' do
       URICompiler.new({:sound_id => 12, :format => :json}).uri.should ==
-        URI.parse("http://www.freesound.org/api/sounds/12?&api_key=#{Configuration.api_key}&format=json")
+        URI.parse("http://www.freesound.org/api/sounds/12/?&api_key=#{Configuration.api_key}&format=json")
     end
 
     it 'compiles a proper search uri' do
       URICompiler.new({:search => {:q => 'bass', :p => 2}, :format => :json}).uri.should ==
-        URI.parse("http://www.freesound.org/api/sounds/search?q=bass&p=2&api_key=#{Configuration.api_key}&format=json")
+        URI.parse("http://www.freesound.org/api/sounds/search/?q=bass&p=2&api_key=#{Configuration.api_key}&format=json")
     end
 
     it 'adds non-default format parameter' do
       URICompiler.new({:format => :xml, :sound_id => 12}).uri.should ==
-        URI.parse("http://www.freesound.org/api/sounds/12?&api_key=#{Configuration.api_key}&format=xml")
+        URI.parse("http://www.freesound.org/api/sounds/12/?&api_key=#{Configuration.api_key}&format=xml")
     end
   end
 end

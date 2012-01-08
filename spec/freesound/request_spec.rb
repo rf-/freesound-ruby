@@ -14,9 +14,9 @@ describe Request do
   describe '#get!' do
     before do
       json = File.read("#{Freesound.root_dir}/data/sample.json")
-      path = "http://www.freesound.org/api/sounds/10?api_key=#{Configuration.api_key}&format=json"
+      path = "http://www.freesound.org/api/sounds/10/?api_key=#{Configuration.api_key}&format=json"
 
-      #stub_request(:get, path).to_return(:body => json)
+      stub_request(:get, path).to_return(:body => json)
     end
 
     it 'returns a Response' do

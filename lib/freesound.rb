@@ -1,5 +1,6 @@
 require 'net/http'
 require 'uri'
+require 'json'
 require 'crack'
 
 YAML::ENGINE.yamler = 'syck'
