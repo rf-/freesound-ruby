@@ -4,7 +4,7 @@ class Freesound::Response
   def initialize(raw, format=:json)
     @content = raw
     @format  = format
-    @parser  = ResponseParser.new(format)
+    @parser  = Freesound::ResponseParser.new(format)
   end
 
   def data
@@ -17,9 +17,9 @@ class Freesound::Response
 
   def sounds
     @sounds ||= if num_results == 1
-                  [ Sound.new(@data) ]
+                  [ Freesound::Sound.new(*self.data.values) ]
                 else
-                  @data[:sounds].map { |data| Sound.new(data) }
+                  self.data[:sounds].map { |data| Freesound::Sound.new(data) }
                 end
   end
 

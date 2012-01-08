@@ -16,12 +16,12 @@ describe Client do
     end
 
     describe '#get_sound' do
-      it 'returns a Response' do
-        subject.get_sound(10).should be_a(Response)
+      it 'returns a Sound' do
+        subject.get_sound(10).should be_a(Sound)
       end
 
       it 'returns a Response corresponding to the given id' do
-        subject.get_sound(10)[:id].should == 10
+        subject.get_sound(10).id.should == 10
       end
 
       it 'adds to @requests and @responses' do
@@ -39,7 +39,8 @@ describe Client do
       end
 
       it 'returns a response' do
-        subject.search_sounds("badass").should be_a(Response)
+        subject.search_sounds("badass").should be_a(Array)
+        subject.search_sounds("badass").first.should be_a(Sound)
       end
     end
   end

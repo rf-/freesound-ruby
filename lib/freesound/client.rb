@@ -10,15 +10,16 @@ class Freesound::Client
   end
 
   def get_sound(id)
-    request = Request.new(:sound_id => id)
+    request = Freesound::Request.new(:sound_id => id)
     response = request.get!
     @requests << request
     @responses << response
-    response
+    response.sounds.first
   end
 
   def search_sounds(query, options={})
-    request = Request.new(:search => {:q => query})
-    request.get!
+    request = Freesound::Request.new(:search => {:q => query})
+    response = request.get!
+    response.sounds
   end
 end

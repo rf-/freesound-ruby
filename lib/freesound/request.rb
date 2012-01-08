@@ -15,11 +15,11 @@ class Freesound::Request
   end
 
   def uri
-    @uri ||= URICompiler.new(@params.dup.merge({:format => @format})).uri
+    @uri ||= Freesound::URICompiler.new(@params.dup.merge({:format => @format})).uri
   end
 
   def get!
     response_body = Net::HTTP.get_response(self.uri).body
-    @response ||= Response.new(response_body, @format)
+    @response ||= Freesound::Response.new(response_body, @format)
   end
 end

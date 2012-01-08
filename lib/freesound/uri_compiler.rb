@@ -21,10 +21,10 @@ class Freesound::URICompiler
   private
 
   def search_uri(search_params, format_string)
-    "#{Configuration.sounds_url}/search/?api_key=#{Freesound.config.api_key}#{format_string}&#{search_params.to_uri}"
+    "#{Freesound.config.sounds_url}/search/?api_key=#{Freesound.config.api_key}#{format_string}&#{search_params.to_uri}"
   end
 
   def sound_id_uri(id, format_string)
-    "#{Configuration.sounds_url}/#{id}/?api_key=#{Freesound.config.api_key}#{format_string}"
+    "#{Freesound.config.sounds_url}/#{id}/?api_key=#{Freesound.config.api_key}#{format_string}"
   end
 end
