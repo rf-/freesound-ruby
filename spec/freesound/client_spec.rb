@@ -24,10 +24,12 @@ describe Client do
         subject.get_sound(10).id.should == 10
       end
 
-      it 'adds to @requests and @responses' do
-        subject.get_sound(10)
-        subject.requests.first.should be_a(Request)
-        subject.responses.first.should be_a(Response)
+      it 'adds to @requests' do
+        expect { subject.get_sound(10) }.to change(subject.requests, :size).by(1)
+      end
+
+      it 'adds to @responses' do
+        expect { subject.get_sound(10) }.to change(subject.responses, :size).by(1)
       end
     end
 

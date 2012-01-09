@@ -22,13 +22,5 @@ describe Request do
     it 'returns a Response' do
       subject.get!.should be_a(Response)
     end
-
-    context 'after #get!' do
-      before { subject.get! }
-    
-      it 'has a response corresponding to the params of the request' do
-        subject.response[:id].should == 10
-      end
-    end
   end
 end

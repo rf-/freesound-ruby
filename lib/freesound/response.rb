@@ -23,9 +23,5 @@ module Freesound
                     self.data[:sounds].map { |data| Sound.new(data) }
                   end
     end
-
-    def [](key)
-      self.data[key]
-    end
   end
 end
