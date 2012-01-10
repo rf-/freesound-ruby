@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Freesound::VERSION
   s.authors     = ["Alex Genco"]
   s.email       = ["alexgenco@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/alexgenco/freesound-ruby"
   s.summary     = %q{Freesound.org API wrapper in Ruby.}
-  s.description = %q{Freesound.org API wrapper in Ruby.}
+  s.description = %q{A wrapper for the Freesound.org API, to provide access to their extensive audio database.}
 
   s.rubyforge_project = "freesound-ruby"
 
