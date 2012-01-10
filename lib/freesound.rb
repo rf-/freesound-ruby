@@ -49,6 +49,7 @@ module Freesound
   end
 end # module Freesound
 
+require 'freesound/version'
 require 'freesound/client'
 require 'freesound/request'
 require 'freesound/uri_compiler'
