@@ -38,8 +38,8 @@ describe Freesound do
     end
 
     it 'fails with unknown configuration parameters' do
-      expect { Freesound.configure(:api_ley => '123') }.to raise_error(Freesound::InvalidConfigurationParameterError)
-      expect { Freesound.configure { |c| c.api_ley = '123' } }.to raise_error(Freesound::InvalidConfigurationParameterError)
+      expect { Freesound.configure(:api_ley => '123') }.to raise_error(Freesound::Configuration::InvalidConfigurationParameterError)
+      expect { Freesound.configure { |c| c.api_ley = '123' } }.to raise_error(Freesound::Configuration::InvalidConfigurationParameterError)
     end
   end
 end

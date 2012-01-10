@@ -19,32 +19,10 @@ class Hash
   end
 
   def numberize_values
-    Hash[ map { |k, v| [k, ( (v.numberizeable? rescue false) ? v.numberize : v )] } ]
+    Hash[ map { |k, v| [k, ((v.numberizeable? rescue false) ? v.numberize : v)] } ]
   end
 
   def underscore_keys
     Hash[ map { |k, v| [(k.underscore rescue k), v] } ]
-  end
-end
-
-class String
-  def numberize
-    if numberizeable?
-      float? ? to_f : to_i
-    end
-  end
-
-  def numberizeable?
-    !scan(/^\-?\d*\.?\d*$/).empty?
-  end
-
-  def underscore
-    gsub(/\W/, '_')
-  end
-
-  private
-
-  def float?
-    scan(/\./).size == 1
   end
 end

@@ -1,16 +1,24 @@
 require 'net/http'
 require 'uri'
 require 'crack'
-require 'core_ext'
 
 YAML::ENGINE.yamler = 'syck'
 
 module Freesound
+
+  require 'freesound/core_ext/hash'
+  require 'freesound/core_ext/string'
+  require 'freesound/version'
+  require 'freesound/client'
+  require 'freesound/request'
+  require 'freesound/uri_compiler'
+  require 'freesound/response'
+  require 'freesound/response_parser'
+  require 'freesound/sound'
+
   def self.root_dir
     File.expand_path('..', File.dirname(__FILE__))
   end
-
-  class InvalidConfigurationParameterError < ArgumentError; end
 
   module Configuration
     DEFAULTS = {
@@ -31,6 +39,8 @@ module Freesound
       EOS
     end
 
+    class InvalidConfigurationParameterError < ArgumentError; end
+
     def self.method_missing(name, *args)
       raise(InvalidConfigurationParameterError, "#{name} is not a recognized configuration parameter")
     end
@@ -48,11 +58,3 @@ module Freesound
     Configuration
   end
 end # module Freesound
-
-require 'freesound/version'
-require 'freesound/client'
-require 'freesound/request'
-require 'freesound/uri_compiler'
-require 'freesound/response'
-require 'freesound/response_parser'
-require 'freesound/sound'
