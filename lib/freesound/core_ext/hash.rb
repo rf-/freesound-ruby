@@ -1,6 +1,6 @@
 class Hash
   def symbolize_keys
-    Hash[ map { |k, v| [k.to_sym, v] } ]
+    Hash[ map { |k, v| [k.underscore.to_sym, v.is_a?(Hash) ? v.symbolize_keys : v] } ]
   end
 
   # converting xml into a hash sometimes gives you things like:
@@ -9,7 +9,7 @@ class Hash
   # { 'element' => 'just_one_value' }
   def flatten_single_element_array_values
     Hash[ map do |k, v|
-      [k, (v.is_a?(Array) && v.size == 1) ? v[0] : v]
+      [k, (v.is_a?(Array) && v.size == 1) ? v[0] : (v.flatten_single_element_array_values rescue v)]
     end ]
   end
 
@@ -20,9 +20,5 @@ class Hash
 
   def numberize_values
     Hash[ map { |k, v| [k, ((v.numberizeable? rescue false) ? v.numberize : v)] } ]
-  end
-
-  def underscore_keys
-    Hash[ map { |k, v| [(k.underscore rescue k), v] } ]
   end
 end

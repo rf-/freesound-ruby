@@ -13,14 +13,18 @@ module Freesound
     end
 
     def num_results
-      self.data[:num_results] || 1
+      self.data.is_a?(Array) ? self.data.size : 1
     end
 
     def sounds
       @sounds ||= if num_results == 1
                     [ Sound.new(*self.data.values) ]
                   else
-                    self.data[:sounds].map { |data| Sound.new(data) }
+                    self.data.map do |sound|
+                      result = Sound.new
+                      sound.each { |k, v| result.send("#{k}=", v) }
+                      result
+                    end
                   end
     end
   end

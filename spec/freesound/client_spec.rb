@@ -40,9 +40,11 @@ describe Client do
         stub_request(:get, path).to_return(:body => json)
       end
 
-      it 'returns a response' do
-        subject.search_sounds("badass").should be_a(Array)
-        subject.search_sounds("badass").first.should be_a(Sound)
+      it 'returns an array of properly parsed sounds' do
+        result = subject.search_sounds("badass")
+        result.should be_a(Array)
+        result.first.should be_a(Sound)
+        result.first.id.should == 80449
       end
     end
   end

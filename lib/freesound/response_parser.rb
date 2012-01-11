@@ -20,7 +20,13 @@ module Freesound
     private
 
     def parse_json(raw)
-      ::Crack::JSON.parse(raw).underscore_keys.symbolize_keys
+      result = ::Crack::JSON.parse(raw)
+
+      if result["sounds"]
+        result["sounds"].map { |sound| sound.symbolize_keys }
+      else
+        result.symbolize_keys
+      end
     end
 
     # xml gets parsed slightly differently than json and yaml.
@@ -28,16 +34,32 @@ module Freesound
     # convert strings like "2" to their corresponding number object i.e. 2
     # and remove the nesting of the :tags key under "resource"
     def parse_xml(raw)
-      result = ::Crack::XML.parse(raw)["response"].underscore_keys
-      .symbolize_keys
-      .flatten_single_element_array_values
-      .numberize_values
-      result[:tags] = result[:tags]["resource"]
-      result
+      result = ::Crack::XML.parse(raw)["response"]
+
+      # put necessary changes in a lambda
+      fix_sound_hash = lambda do |hash|
+        fixed = hash.symbolize_keys.flatten_single_element_array_values.numberize_values
+        fixed[:tags] = fixed[:tags][:resource]
+        fixed
+      end
+
+      if result["sounds"]
+        result["sounds"].map do |sound|
+          fix_sound_hash.call(sound)
+        end
+      else
+        fix_sound_hash.call(result)
+      end
     end
 
     def parse_yaml(raw)
-      ::YAML::load(raw).underscore_keys.symbolize_keys
+      result = ::YAML::load(raw)
+
+      if result["sounds"]
+        result["sounds"].map { |sound| sound.symbolize_keys }
+      else
+        result.symbolize_keys
+      end
     end
   end
 end
