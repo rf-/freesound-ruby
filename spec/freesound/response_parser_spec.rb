@@ -2,22 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ResponseParser do
   it 'initializes with a format' do
-    ResponseParser.new(:xml).format.should == :xml
+    ResponseParser.new(:xml).format.should  == :xml
+    ResponseParser.new(:yaml).format.should == :yaml
   end
 
   describe '#parse' do
     before do
-      @json = File.read("#{Freesound.root_dir}/data/sample.json")
-      @xml  = File.read("#{Freesound.root_dir}/data/sample.xml")
-      @yaml = File.read("#{Freesound.root_dir}/data/sample.yaml")
-
       @json_parser = ResponseParser.new(:json)
       @xml_parser  = ResponseParser.new(:xml)
       @yaml_parser = ResponseParser.new(:yaml)
 
-      @json_result = @json_parser.parse(@json)
-      @xml_result  = @xml_parser.parse(@xml)
-      @yaml_result = @yaml_parser.parse(@yaml)
+      @json_result = @json_parser.parse(@sound_json)
+      @xml_result  = @xml_parser.parse(@sound_xml)
+      @yaml_result = @yaml_parser.parse(@sound_yaml)
 
       # these are the expected tags if the above files are parsed correctly
       @tags = [ "transformation", "speech", "voice", "plane", "morph" ]

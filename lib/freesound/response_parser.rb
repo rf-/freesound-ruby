@@ -2,8 +2,8 @@ module Freesound
   class ResponseParser
     attr_reader :format
 
-    def initialize(format)
-      @format = format
+    def initialize(form)
+      @format = form
     end
 
     def parse(raw)

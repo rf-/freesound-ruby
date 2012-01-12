@@ -1,27 +1,36 @@
 module Freesound
   class InvalidRequestFormatError < ArgumentError; end
+  class InvalidApiKeyError < ArgumentError; end
 
   class Request
-    attr_reader :uri, :params, :response, :format
+    attr_reader :uri, :uri_compiler, :params, :response, :format, :api_key
 
-    def initialize(params={})
+    def initialize(api_key, params={})
       self.format = params[:format] || :json
+      @api_key = api_key
       @params = params
       @response = nil
     end
 
-    def format=(format)
-      raise(InvalidRequestFormatError, "#{format} is not a valid request format") unless [:json, :xml, :yaml, :yml].include?(format.to_sym)
-      @format = format.to_sym
+    def format=(form)
+      raise(InvalidRequestFormatError, "#{form} is not a valid request format") unless [:json, :xml, :yaml, :yml].include?(form.to_sym)
+      @format = form.to_sym
+    end
+
+    def uri_compiler
+      @uri_compiler ||= URICompiler.new(@api_key, @params.dup.merge({:format => @format}))
     end
 
     def uri
-      @uri ||= URICompiler.new(@params.dup.merge({:format => @format})).uri
+      @uri ||= self.uri_compiler.uri
     end
 
     def get!
       response_body = Net::HTTP.get_response(self.uri).body
       @response ||= Response.new(response_body, @format)
+
+      raise(InvalidApiKeyError, "#{@api_key} is not a valid API key") if @response.errors[:error]
+      @response
     end
   end
 end

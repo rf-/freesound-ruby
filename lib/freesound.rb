@@ -22,7 +22,7 @@ module Freesound
 
   module Configuration
     DEFAULTS = {
-      :api_key    => ENV['FREESOUND_KEY'],
+      :api_key    => nil,
       :base_url   => 'http://www.freesound.org/api',
       :sounds_url => 'http://www.freesound.org/api/sounds'
     }
