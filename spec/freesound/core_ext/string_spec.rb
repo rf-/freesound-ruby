@@ -25,13 +25,13 @@ describe String do
     end
   end
 
-  describe '#underscore' do
+  describe '#fs_underscore' do
     it 'underscores -s' do
-      'one-two'.underscore.should == 'one_two'
+      'one-two'.fs_underscore.should == 'one_two'
     end
 
     it 'underscores whitespace' do
-      'one two'.underscore.should == 'one_two'
+      'one two'.fs_underscore.should == 'one_two'
     end
   end
 end

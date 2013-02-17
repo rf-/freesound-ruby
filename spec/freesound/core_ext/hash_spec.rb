@@ -1,13 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Hash do
-  describe '#symbolize_keys' do
+  describe '#fs_symbolize_keys' do
     it 'symbolizes keys' do
-      {"one" => 1, "two" => 2}.symbolize_keys.should == {:one => 1, :two => 2}
+      {"one" => 1, "two" => 2}.fs_symbolize_keys.should == {:one => 1, :two => 2}
     end
 
     it 'symbolizes keys to an arbitrary level of nestedness' do
-      {"one" => 1, "two" => { "three" => 3, "four" => { "five" => 5}}}.symbolize_keys.should == 
+      {"one" => 1, "two" => { "three" => 3, "four" => { "five" => 5}}}.fs_symbolize_keys.should == 
         {:one => 1, :two => { :three => 3, :four => { :five => 5}}}
     end
   end

@@ -1,6 +1,6 @@
 class Hash
-  def symbolize_keys
-    Hash[ map { |k, v| [k.underscore.to_sym, v.is_a?(Hash) ? v.symbolize_keys : v] } ]
+  def fs_symbolize_keys
+    Hash[ map { |k, v| [k.fs_underscore.to_sym, v.is_a?(Hash) ? v.fs_symbolize_keys : v] } ]
   end
 
   # converting xml into a hash sometimes gives you things like:

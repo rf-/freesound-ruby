@@ -23,9 +23,9 @@ module Freesound
       result = ::Crack::JSON.parse(raw)
 
       if result["sounds"]
-        result["sounds"].map { |sound| sound.symbolize_keys }
+        result["sounds"].map { |sound| sound.fs_symbolize_keys }
       else
-        result.symbolize_keys
+        result.fs_symbolize_keys
       end
     end
 
@@ -38,7 +38,7 @@ module Freesound
 
       # put necessary changes in a lambda
       fix_sound_hash = lambda do |hash|
-        fixed = hash.symbolize_keys.flatten_single_element_array_values.numberize_values
+        fixed = hash.fs_symbolize_keys.flatten_single_element_array_values.numberize_values
         fixed[:tags] = fixed[:tags][:resource]
         fixed
       end
@@ -56,9 +56,9 @@ module Freesound
       result = ::YAML::load(raw)
 
       if result["sounds"]
-        result["sounds"].map { |sound| sound.symbolize_keys }
+        result["sounds"].map { |sound| sound.fs_symbolize_keys }
       else
-        result.symbolize_keys
+        result.fs_symbolize_keys
       end
     end
   end

@@ -9,7 +9,7 @@ class String
     !scan(/^\-?\d*\.?\d*$/).empty?
   end
 
-  def underscore
+  def fs_underscore
     gsub(/\W/, '_')
   end
 
